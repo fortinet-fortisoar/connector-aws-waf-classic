@@ -1,0 +1,481 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "uuid": "ee42c31f-f91c-45c4-8945-f4d8ed3bbe7f",
+      "@type": "WorkflowCollection",
+      "name": "Sample - AWS WAF Classic - 1.0.0",
+      "description": "AWS WAF Classic is a web application firewall that lets you monitor and manage web requests that are forwarded to protected AWS resources.",
+      "visible": true,
+      "image": null,
+      "recordTags": [
+        "Aws",
+        "aws-waf-classic"
+      ],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "uuid": "517d49c4-9d9c-4e25-8d58-9cdff9e5a2a9",
+          "collection": "/api/3/workflow_collections/ee42c31f-f91c-45c4-8945-f4d8ed3bbe7f",
+          "triggerLimit": null,
+          "description": "Creates an IPSet, which you use to identify web requests that originate from specific IP addresses or ranges of IP addresses.",
+          "name": "Create IP Set",
+          "tag": "#AWS WAF Classic",
+          "recordTags": [
+            "Aws",
+            "aws-waf-classic"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/9b626301-3bb3-430b-ada7-8b41b0492ce6",
+          "steps": [
+            {
+              "uuid": "9b626301-3bb3-430b-ada7-8b41b0492ce6",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "14de98ee-5f56-47c9-be20-dd93de50ac44",
+                "title": "AWS WAF Classic: Create IP Set",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "fed9f6b9-b995-4a7d-a6ac-62b93fc5c1da",
+              "@type": "WorkflowStep",
+              "name": "Create IP Set",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "AWS WAF Classic",
+                "config": "''",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "aws-waf-classic",
+                "operation": "create_ip_set",
+                "operationTitle": "Create IP Set"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "36c0983e-e17d-419a-aa31-64352ef37aa3",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Create IP Set",
+              "sourceStep": "/api/3/workflow_steps/9b626301-3bb3-430b-ada7-8b41b0492ce6",
+              "targetStep": "/api/3/workflow_steps/fed9f6b9-b995-4a7d-a6ac-62b93fc5c1da"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "2fa31bee-8baf-48a5-811e-c6e8ee24bbd6",
+          "collection": "/api/3/workflow_collections/ee42c31f-f91c-45c4-8945-f4d8ed3bbe7f",
+          "triggerLimit": null,
+          "description": "Updates the specified IPSet based on the input parameters specified.",
+          "name": "Update IP Set",
+          "tag": "#AWS WAF Classic",
+          "recordTags": [
+            "Aws",
+            "aws-waf-classic"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/e4656913-c1d4-42c3-9b7a-64f881d44b07",
+          "steps": [
+            {
+              "uuid": "e4656913-c1d4-42c3-9b7a-64f881d44b07",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "f79ac595-4ab3-4210-8342-2df576425bfb",
+                "title": "AWS WAF Classic: Update IP Set",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "38576819-68be-47c1-9d59-821739df6834",
+              "@type": "WorkflowStep",
+              "name": "Update IP Set",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "AWS WAF Classic",
+                "config": "''",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "aws-waf-classic",
+                "operation": "update_ip_set",
+                "operationTitle": "Update IP Set"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "d5b40e92-bd35-4199-a609-7586bc13ba84",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Update IP Set",
+              "sourceStep": "/api/3/workflow_steps/e4656913-c1d4-42c3-9b7a-64f881d44b07",
+              "targetStep": "/api/3/workflow_steps/38576819-68be-47c1-9d59-821739df6834"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "6d0134bb-5a85-4dcf-81c2-9278420cc576",
+          "collection": "/api/3/workflow_collections/ee42c31f-f91c-45c4-8945-f4d8ed3bbe7f",
+          "triggerLimit": null,
+          "description": "Retrieves an array of IPSet Summary objects for the IP sets that you manage.",
+          "name": "List IP Sets",
+          "tag": "#AWS WAF Classic",
+          "recordTags": [
+            "Aws",
+            "aws-waf-classic"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/6c509518-6c37-426d-8501-f1c6459c9a7f",
+          "steps": [
+            {
+              "uuid": "6c509518-6c37-426d-8501-f1c6459c9a7f",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "c73e141e-54e5-4431-8684-9ef4568170fc",
+                "title": "AWS WAF Classic: List IP Sets",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "3b77c4a0-ad14-4fdf-aace-5eb3a04036d2",
+              "@type": "WorkflowStep",
+              "name": "List IP Sets",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "AWS WAF Classic",
+                "config": "''",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "aws-waf-classic",
+                "operation": "list_ip_set",
+                "operationTitle": "List IP Sets"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "21cfc40e-ba12-4443-b53a-d620eefb705b",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> List IP Sets",
+              "sourceStep": "/api/3/workflow_steps/6c509518-6c37-426d-8501-f1c6459c9a7f",
+              "targetStep": "/api/3/workflow_steps/3b77c4a0-ad14-4fdf-aace-5eb3a04036d2"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "6a9ecfe7-f00a-4b82-bdf7-9d5de66bf013",
+          "collection": "/api/3/workflow_collections/ee42c31f-f91c-45c4-8945-f4d8ed3bbe7f",
+          "triggerLimit": null,
+          "description": "Retrieves the specified IPSet based on the input parameters specified.",
+          "name": "Get IP Set",
+          "tag": "#AWS WAF Classic",
+          "recordTags": [
+            "Aws",
+            "aws-waf-classic"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/73c886f6-0fac-4896-95f6-9a59a8fe3365",
+          "steps": [
+            {
+              "uuid": "73c886f6-0fac-4896-95f6-9a59a8fe3365",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "1550fdaf-4d26-4e8e-849f-0453e492c4a3",
+                "title": "AWS WAF Classic: Get IP Set",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "8a2cb1d0-595d-4dc0-af42-e4d50899bd53",
+              "@type": "WorkflowStep",
+              "name": "Get IP Set",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "AWS WAF Classic",
+                "config": "''",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "aws-waf-classic",
+                "operation": "get_ip_set",
+                "operationTitle": "Get IP Set"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "b0f0665e-1b31-4341-a828-4bdcbd3fa85d",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get IP Set",
+              "sourceStep": "/api/3/workflow_steps/73c886f6-0fac-4896-95f6-9a59a8fe3365",
+              "targetStep": "/api/3/workflow_steps/8a2cb1d0-595d-4dc0-af42-e4d50899bd53"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "18650ecf-b051-43b8-a92e-69df5d694a0f",
+          "collection": "/api/3/workflow_collections/ee42c31f-f91c-45c4-8945-f4d8ed3bbe7f",
+          "triggerLimit": null,
+          "description": "Deletes the specified IPSet based on the input parameters specified.",
+          "name": "Delete IP Set",
+          "tag": "#AWS WAF Classic",
+          "recordTags": [
+            "Aws",
+            "aws-waf-classic"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/7f30f628-fdd6-431d-907a-8a029e6c1242",
+          "steps": [
+            {
+              "uuid": "7f30f628-fdd6-431d-907a-8a029e6c1242",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "dbe71936-d8de-4ebc-974f-2c4df8eda02d",
+                "title": "AWS WAF Classic: Delete IP Set",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "6db528a4-5028-4ef2-ad3a-52d254aba5fe",
+              "@type": "WorkflowStep",
+              "name": "Delete IP Set",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "AWS WAF Classic",
+                "config": "''",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "aws-waf-classic",
+                "operation": "delete_ip_set",
+                "operationTitle": "Delete IP Set"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "87bfb278-031e-4435-a95a-93d2ed7a90e9",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Delete IP Set",
+              "sourceStep": "/api/3/workflow_steps/7f30f628-fdd6-431d-907a-8a029e6c1242",
+              "targetStep": "/api/3/workflow_steps/6db528a4-5028-4ef2-ad3a-52d254aba5fe"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "4f390cba-3c16-48a9-bb08-a2a1e6644162",
+          "collection": "/api/3/workflow_collections/ee42c31f-f91c-45c4-8945-f4d8ed3bbe7f",
+          "triggerLimit": null,
+          "description": "Retrieves a change token and include the change token in the create, update, or delete request. Change tokens ensure that your application doesn't submit conflicting requests to AWS WAF.",
+          "name": "Get Change Token",
+          "tag": "#AWS WAF Classic",
+          "recordTags": [
+            "Aws",
+            "aws-waf-classic"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/18ebe1bc-d91c-493a-890a-c131deb4bc46",
+          "steps": [
+            {
+              "uuid": "18ebe1bc-d91c-493a-890a-c131deb4bc46",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "2e96aee7-bb2d-48b3-b68f-abed59987e7e",
+                "title": "AWS WAF Classic: Get Change Token",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "b93fa2a4-58b0-415c-bb8e-f48973824938",
+              "@type": "WorkflowStep",
+              "name": "Get Change Token",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "AWS WAF Classic",
+                "config": "''",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "aws-waf-classic",
+                "operation": "get_change_token",
+                "operationTitle": "Get Change Token"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "00b52616-406a-4b78-8150-b46d17e6a3a6",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Change Token",
+              "sourceStep": "/api/3/workflow_steps/18ebe1bc-d91c-493a-890a-c131deb4bc46",
+              "targetStep": "/api/3/workflow_steps/b93fa2a4-58b0-415c-bb8e-f48973824938"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
