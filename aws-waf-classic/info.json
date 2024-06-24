@@ -1,0 +1,365 @@
+{
+  "name": "aws-waf-classic",
+  "label": "AWS WAF Classic",
+  "description": "AWS WAF Classic is a web application firewall that lets you monitor and manage web requests that are forwarded to protected AWS resources.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "version": "1.0.0",
+  "category": "DevOps",
+  "contributor": "",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "help_online": "",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Region",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "aws_region",
+        "placeholder": "e.g. us-east-2",
+        "tooltip": "Your account's AWS region",
+        "description": "AWS region of your account to access the AWS WAF services."
+      },
+      {
+        "title": "Service Name",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "select",
+        "name": "service_name",
+        "value": "AWS WAF Classic",
+        "options": [
+          "AWS WAF Classic",
+          "AWS WAF Classic Regional"
+        ],
+        "tooltip": "Specify the name of the service to connect. You can select between AWS WAF Classic and AWS WAF Classic Regional. By default AWS WAF Classic is selected.",
+        "description": "Specify the name of the service to connect. You can select between AWS WAF Classic and AWS WAF Classic Regional. By default AWS WAF Classic is selected."
+      },
+      {
+        "title": "Configuration Type",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "select",
+        "name": "config_type",
+        "tooltip": "AWS configuration type",
+        "description": "AWS configuration type that determines the authentication mechanism that you will use to provide credentials and access AWS WAF. You can choose either IAM Role or Access Credentials to connect to AWS. AWS Identity and Access Management (IAM) role is an IAM entity that defines a set of permissions for making AWS service requests. IAM roles are not associated with a specific user or group. Instead, trusted entities assume roles, such as IAM users, applications, or AWS services.If you choose IAM Role, then you must specify the following parameter:\n\t\t\t\nAWS Instance IAM Role: IAM Role of your AWS instance to access AWS services.\n\n\t\t\tIf you choose Access Credentials, then you must specify the following parameters:\n\n\t\t\t\nAccess Key: The AWS Access Key to access AWS services. \nSecret Key: Key of the AWS Secret Access to access AWS services.",
+        "options": [
+          "IAM Role",
+          "Access Credentials"
+        ],
+        "onchange": {
+          "IAM Role": [
+            {
+              "title": "AWS Instance IAM Role",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "type": "text",
+              "name": "aws_iam_role",
+              "tooltip": "IAM Role of your AWS instance to access AWS services",
+              "description": "IAM Role of your AWS instance to access AWS services."
+            }
+          ],
+          "Access Credentials": [
+            {
+              "title": "Access Key",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "type": "text",
+              "name": "access_key",
+              "tooltip": "The AWS Access Key to access AWS services",
+              "description": "The AWS Access Key to access AWS services.  "
+            },
+            {
+              "title": "Secret Key",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "type": "password",
+              "name": "secret_key",
+              "tooltip": "Key of the AWS Secret Access to access AWS services",
+              "description": "Key of the AWS Secret Access to access AWS services."
+            }
+          ]
+        }
+      },
+      {
+        "title": "Verify SSL",
+        "name": "verify_ssl",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "checkbox",
+        "value": true,
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True."
+      }
+    ]
+  },
+  "operations": [
+    {
+      "title": "Create IP Set",
+      "description": "Creates an IP set, which you use to identify web requests that originate from specific IP addresses or ranges of IP addresses.",
+      "operation": "create_ip_set",
+      "category": "investigation",
+      "annotation": "create_ip_set",
+      "parameters": [
+        {
+          "title": "Name",
+          "name": "Name",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Specify the name of the IP set. You cannot change the name of an IP set after you create it.",
+          "description": "Specify the name of the IP set. You cannot change the name of an IP set after you create it."
+        },
+        {
+          "title": "Change Token",
+          "name": "ChangeToken",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Specify the value returned by the most recent call to Get Change Token.",
+          "description": "Specify the value returned by the most recent call to Get Change Token."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "IPSet": {
+          "IPSetId": "",
+          "Name": "",
+          "IPSetDescriptors": []
+        },
+        "ChangeToken": "",
+        "ResponseMetadata": {
+          "RequestId": "",
+          "HTTPStatusCode": "",
+          "HTTPHeaders": {
+            "x-amzn-requestid": "",
+            "content-type": "",
+            "content-length": "",
+            "date": ""
+          },
+          "RetryAttempts": ""
+        }
+      }
+    },
+    {
+      "title": "Update IP Set",
+      "description": "Updates the specified IP set based on the input parameters specified.",
+      "operation": "update_ip_set",
+      "category": "investigation",
+      "annotation": "update_ip_set",
+      "parameters": [
+        {
+          "title": "IP Set ID",
+          "name": "IPSetId",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Specify the IP set ID of the IP set that you want to update. IP set ID is returned by Create IP Set and by List IP Sets actions.",
+          "description": "Specify the IP set ID of the IP set that you want to update. IP set ID is returned by Create IP Set and by List IP Sets actions."
+        },
+        {
+          "title": "Change Token",
+          "name": "ChangeToken",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Specify the value returned by the most recent call to Get Change Token.",
+          "description": "Specify the value returned by the most recent call to Get Change Token."
+        },
+        {
+          "title": "IP Addresses",
+          "name": "Updates",
+          "type": "json",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Specify an array of IP set Update objects that you want to insert into or delete from an IP set.",
+          "description": "Specify an array of IP set Update objects that you want to insert into or delete from an IP set. For more information, see the https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/waf/client/update_ip_set.html#",
+          "value": "[\n        {\n            'Action': 'INSERT'|'DELETE',\n            'IPSetDescriptor': {\n                'Type': 'IPV4'|'IPV6',\n                'Value': 'string'\n            }\n        },\n    ]"
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "ChangeToken": "",
+        "ResponseMetadata": {
+          "RequestId": "",
+          "HTTPStatusCode": "",
+          "HTTPHeaders": {
+            "x-amzn-requestid": "",
+            "content-type": "",
+            "content-length": "",
+            "date": ""
+          },
+          "RetryAttempts": ""
+        }
+      }
+    },
+    {
+      "title": "List IP Sets",
+      "description": "Retrieves an array of IP set Summary objects for the IP sets that you manage.",
+      "operation": "list_ip_set",
+      "category": "investigation",
+      "annotation": "list_ip_set",
+      "parameters": [
+        {
+          "title": "Limit",
+          "name": "Limit",
+          "type": "integer",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "tooltip": "Specify the maximum number of objects that you want AWS WAF to return for this request. If more objects are available, in the response, WAF provides a NextMarker value that you can use in a subsequent call to get the next batch of objects.",
+          "description": "Specify the maximum number of objects that you want AWS WAF to return for this request. If more objects are available, in the response, WAF provides a NextMarker value that you can use in a subsequent call to get the next batch of objects."
+        },
+        {
+          "title": "Next Marker",
+          "name": "NextMarker",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "tooltip": "Specify the marker from the prior call to retrieve the next batch of objects.",
+          "description": "Specify the marker from the prior call to retrieve the next batch of objects."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "NextMarker": "",
+        "IPSets": [
+          {
+            "IPSetId": "",
+            "Name": ""
+          }
+        ],
+        "ResponseMetadata": {
+          "RequestId": "",
+          "HTTPStatusCode": "",
+          "HTTPHeaders": {
+            "x-amzn-requestid": "",
+            "content-type": "",
+            "content-length": "",
+            "date": ""
+          },
+          "RetryAttempts": ""
+        }
+      }
+    },
+    {
+      "title": "Get IP Set",
+      "description": "Retrieves the specified IP set based on the input parameters specified.",
+      "operation": "get_ip_set",
+      "category": "investigation",
+      "annotation": "get_ip_set",
+      "parameters": [
+        {
+          "title": "IP Set ID",
+          "name": "IPSetId",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Specify the IP set ID of the IP set that you want to get. IP set ID is returned by Create IP Set and by List IP Sets actions.",
+          "description": "Specify the IP set ID of the IP set that you want to get. IP set ID is returned by Create IP Set and by List IP Sets actions."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "IPSet": {
+          "IPSetId": "",
+          "Name": "",
+          "IPSetDescriptors": []
+        },
+        "ResponseMetadata": {
+          "RequestId": "",
+          "HTTPStatusCode": "",
+          "HTTPHeaders": {
+            "x-amzn-requestid": "",
+            "content-type": "",
+            "content-length": "",
+            "date": ""
+          },
+          "RetryAttempts": ""
+        }
+      }
+    },
+    {
+      "title": "Delete IP Set",
+      "description": "Deletes the specified IP set based on the input parameters specified.",
+      "operation": "delete_ip_set",
+      "category": "investigation",
+      "annotation": "delete_ip_set",
+      "parameters": [
+        {
+          "title": "Change Token",
+          "name": "ChangeToken",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Specify the value returned by the most recent call to Get Change Token.",
+          "description": "Specify the value returned by the most recent call to Get Change Token."
+        },
+        {
+          "title": "IP Set ID",
+          "name": "IPSetId",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Specify the IP set ID of the IP set that you want to delete. IP set ID is returned by Create IP Set and by List IP Sets. Note Permanently deletes an IP set. You can't delete an IP set if it's still used in any Rules or if it still includes any IP addresses.",
+          "description": "Specify the IP set ID of the IP set that you want to delete. IP set ID is returned by Create IP Set and by List IP Sets. Permanently deletes an IP set. You can't delete an IP set if it's still used in any Rules or if it still includes any IP addresses."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "ChangeToken": "",
+        "ResponseMetadata": {
+          "RequestId": "",
+          "HTTPStatusCode": "",
+          "HTTPHeaders": {
+            "x-amzn-requestid": "",
+            "content-type": "",
+            "content-length": "",
+            "date": ""
+          },
+          "RetryAttempts": ""
+        }
+      }
+    },
+    {
+      "title": "Get Change Token",
+      "description": "Retrieves a change token and include the change token in the create, update, or delete request. Change tokens ensure that your application doesn't submit conflicting requests to AWS WAF.",
+      "operation": "get_change_token",
+      "category": "investigation",
+      "annotation": "get_change_token",
+      "parameters": [],
+      "enabled": true,
+      "output_schema": {
+        "ChangeToken": "",
+        "ResponseMetadata": {
+          "RequestId": "",
+          "HTTPStatusCode": "",
+          "HTTPHeaders": {
+            "x-amzn-requestid": "",
+            "content-type": "",
+            "content-length": "",
+            "date": ""
+          },
+          "RetryAttempts": ""
+        }
+      }
+    }
+  ]
+}
