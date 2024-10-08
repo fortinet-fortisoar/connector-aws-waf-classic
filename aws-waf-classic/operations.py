@@ -110,7 +110,7 @@ def _boto_execute(client, function, **kwargs):
 
 def check_health(config):
     try:
-        available = _create_client(config)
+        available = list_ip_set(config, {})
         if available:
             return True
         else:
