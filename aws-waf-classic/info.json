@@ -10,7 +10,7 @@
   "contributor": "",
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
-  "help_online": "",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.0/aws-waf-classic/996/aws-waf-classic-v1-0-0",
   "configuration": {
     "fields": [
       {
@@ -36,8 +36,8 @@
           "AWS WAF Classic",
           "AWS WAF Classic Regional"
         ],
-        "tooltip": "Specify the name of the service to connect. You can select between AWS WAF Classic and AWS WAF Classic Regional. By default AWS WAF Classic is selected.",
-        "description": "Specify the name of the service to connect. You can select between AWS WAF Classic and AWS WAF Classic Regional. By default AWS WAF Classic is selected."
+        "tooltip": "You can choose to connect to either AWS WAF Classic or AWS WAF Classic Regional. By default, AWS WAF Classic is selected. If AWS WAF Classic is chosen, the IP set will be created in global CloudFront, regardless of the specified region.",
+        "description": "Select the name of the service to connect. You can choose from following options: AWS WAF Classic (default) AWS WAF Classic Regional"
       },
       {
         "title": "Configuration Type",
@@ -47,7 +47,7 @@
         "type": "select",
         "name": "config_type",
         "tooltip": "AWS configuration type",
-        "description": "AWS configuration type that determines the authentication mechanism that you will use to provide credentials and access AWS WAF. You can choose either IAM Role or Access Credentials to connect to AWS. AWS Identity and Access Management (IAM) role is an IAM entity that defines a set of permissions for making AWS service requests. IAM roles are not associated with a specific user or group. Instead, trusted entities assume roles, such as IAM users, applications, or AWS services.If you choose IAM Role, then you must specify the following parameter:\n\t\t\t\nAWS Instance IAM Role: IAM Role of your AWS instance to access AWS services.\n\n\t\t\tIf you choose Access Credentials, then you must specify the following parameters:\n\n\t\t\t\nAccess Key: The AWS Access Key to access AWS services. \nSecret Key: Key of the AWS Secret Access to access AWS services.",
+        "description": "Specify the AWS configuration type to determine the authentication mechanism for accessing AWS WAF. You can select from the following options: IAM Role: Select to specify the IAM role of your AWS instance, in the IAM Role field. Access Credentials: Select to specify your access credentials for AWS WAF in the following fields: Access Key: Specify the AWS Access Key to access AWS services. Secret Key: Specify the AWS Secret key to access AWS services.",
         "options": [
           "IAM Role",
           "Access Credentials"
@@ -97,14 +97,14 @@
         "visible": true,
         "type": "checkbox",
         "value": true,
-        "description": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True."
+        "description": "Specifies whether the SSL certificate for the server is to be verified. By default, this option is selected, i.e., set to true."
       }
     ]
   },
   "operations": [
     {
       "title": "Create IP Set",
-      "description": "Creates an IP set, which you use to identify web requests that originate from specific IP addresses or ranges of IP addresses.",
+      "description": "Creates an IP set to identify web requests that originate from these specific IP addresses or ranges based on the IP set name, IP address version, and other input parameters that you have specified.",
       "operation": "create_ip_set",
       "category": "investigation",
       "annotation": "create_ip_set",
@@ -117,7 +117,7 @@
           "editable": true,
           "required": true,
           "tooltip": "Specify the name of the IP set. You cannot change the name of an IP set after you create it.",
-          "description": "Specify the name of the IP set. You cannot change the name of an IP set after you create it."
+          "description": "Specify the name of the IP set to create on AWS WAF Classic. NOTE: You cannot change the name of an IP set after you have created it."
         },
         {
           "title": "Change Token",
@@ -127,7 +127,7 @@
           "editable": true,
           "required": true,
           "tooltip": "Specify the value returned by the most recent call to Get Change Token.",
-          "description": "Specify the value returned by the most recent call to Get Change Token."
+          "description": "Specify the value returned by the most recent call to the Get Change Token action."
         }
       ],
       "enabled": true,
@@ -153,7 +153,7 @@
     },
     {
       "title": "Update IP Set",
-      "description": "Updates the specified IP set based on the input parameters specified.",
+      "description": "Updates the specified IP set based on the IP set name, ID, and other input parameters that you have specified.",
       "operation": "update_ip_set",
       "category": "investigation",
       "annotation": "update_ip_set",
@@ -176,7 +176,7 @@
           "editable": true,
           "required": true,
           "tooltip": "Specify the value returned by the most recent call to Get Change Token.",
-          "description": "Specify the value returned by the most recent call to Get Change Token."
+          "description": "Specify the value returned by the most recent call to the Get Change Token action."
         },
         {
           "title": "IP Addresses",
@@ -186,7 +186,7 @@
           "editable": true,
           "required": true,
           "tooltip": "Specify an array of IP set Update objects that you want to insert into or delete from an IP set.",
-          "description": "Specify an array of IP set Update objects that you want to insert into or delete from an IP set. For more information, see the https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/waf/client/update_ip_set.html#",
+          "description": "Specify an array of IP set objects to insert into or delete from an IP set. For more information, refer to https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/waf/client/update_ip_set.html.",
           "value": "[\n        {\n            'Action': 'INSERT'|'DELETE',\n            'IPSetDescriptor': {\n                'Type': 'IPV4'|'IPV6',\n                'Value': 'string'\n            }\n        },\n    ]"
         }
       ],
@@ -221,7 +221,7 @@
           "editable": true,
           "required": false,
           "tooltip": "Specify the maximum number of objects that you want AWS WAF to return for this request. If more objects are available, in the response, WAF provides a NextMarker value that you can use in a subsequent call to get the next batch of objects.",
-          "description": "Specify the maximum number of objects that you want AWS WAF to return for this request. If more objects are available, in the response, WAF provides a NextMarker value that you can use in a subsequent call to get the next batch of objects."
+          "description": "(Optional) Specify the maximum number of objects that you want AWS WAF to return for this request. If more objects are available, in the response, WAF provides a NextMarker value that you can use in a subsequent call to get the next batch of objects."
         },
         {
           "title": "Next Marker",
@@ -231,7 +231,7 @@
           "editable": true,
           "required": false,
           "tooltip": "Specify the marker from the prior call to retrieve the next batch of objects.",
-          "description": "Specify the marker from the prior call to retrieve the next batch of objects."
+          "description": "(Optional) Specify a NextMarker from the previous call to retrieve the next batch of objects."
         }
       ],
       "enabled": true,
@@ -271,7 +271,7 @@
           "editable": true,
           "required": true,
           "tooltip": "Specify the IP set ID of the IP set that you want to get. IP set ID is returned by Create IP Set and by List IP Sets actions.",
-          "description": "Specify the IP set ID of the IP set that you want to get. IP set ID is returned by Create IP Set and by List IP Sets actions."
+          "description": "Specify the ID of the IP set to retrieve. NOTE: The Create IP Set and List IP Sets actions return the IP set ID."
         }
       ],
       "enabled": true,
@@ -309,7 +309,7 @@
           "editable": true,
           "required": true,
           "tooltip": "Specify the value returned by the most recent call to Get Change Token.",
-          "description": "Specify the value returned by the most recent call to Get Change Token."
+          "description": "Specify the value returned by the most recent call to the Get Change Token action."
         },
         {
           "title": "IP Set ID",
@@ -319,7 +319,7 @@
           "editable": true,
           "required": true,
           "tooltip": "Specify the IP set ID of the IP set that you want to delete. IP set ID is returned by Create IP Set and by List IP Sets. Note Permanently deletes an IP set. You can't delete an IP set if it's still used in any Rules or if it still includes any IP addresses.",
-          "description": "Specify the IP set ID of the IP set that you want to delete. IP set ID is returned by Create IP Set and by List IP Sets. Permanently deletes an IP set. You can't delete an IP set if it's still used in any Rules or if it still includes any IP addresses."
+          "description": "Specify the ID of the IP set to delete permanently. NOTE: The Create IP Set and List IP Sets actions return the IP set ID. You can't delete an IP set if it's still used in any Rules or if it still includes any IP addresses."
         }
       ],
       "enabled": true,
@@ -340,7 +340,7 @@
     },
     {
       "title": "Get Change Token",
-      "description": "Retrieves a change token and include the change token in the create, update, or delete request. Change tokens ensure that your application doesn't submit conflicting requests to AWS WAF.",
+      "description": "Retrieves a change token for create, update, or delete requests. Change tokens ensure that your application doesn't submit conflicting requests to AWS WAF.",
       "operation": "get_change_token",
       "category": "investigation",
       "annotation": "get_change_token",
